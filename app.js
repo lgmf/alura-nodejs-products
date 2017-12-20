@@ -1,21 +1,15 @@
+//imports
 let express = require('express')
 let app = express()
 
+//variables
 const port = 3000
 
-const template = 
-`<html>
-    <body>
-        <h1>All Products</h1>
-    </body>
-</html>`
-
 app
+    .set('view engine','ejs')
     .get(`/products`, (request, response) => {
-        response.send(template)
+        response.render("products/products-list/list")
     })
-
-app
     .listen(port, () => {
         console.log(`Server is working at ${port}`)
     })
