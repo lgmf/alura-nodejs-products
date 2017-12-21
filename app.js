@@ -1,14 +1,11 @@
 //imports
-let app = require('./config/express')
-
+let app = require('./config/express')()
+let productsRoutes = require('./app/routes/products')(app)
 
 //variables
 const port = 3000
 
 app
-    .get(`/products`, (request, response) => {
-        response.render("products/products-list/list")
-    })
     .listen(port, () => {
         console.log(`Server is working at ${port}`)
     })

@@ -1,6 +1,5 @@
 let express = require('express')();
 express.set('view engine', 'ejs')
+express.set('views','./app/views')
 
-let initializeExpress = () => { return express }
-
-module.exports = initializeExpress()
+module.exports = () => { return express }
