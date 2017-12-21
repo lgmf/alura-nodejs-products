@@ -1,12 +1,11 @@
 //imports
-let express = require('express')
-let app = express()
+let app = require('./config/express')
+
 
 //variables
 const port = 3000
 
 app
-    .set('view engine','ejs')
     .get(`/products`, (request, response) => {
         response.render("products/products-list/list")
     })
