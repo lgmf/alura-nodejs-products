@@ -2,14 +2,13 @@ module.exports = (app) => {
     app
         .get(`/products`, (req, res) => {
 
-            let db = app.shared.connectionFactory();
+            let dbConnection = app.shared.connectionFactory();
+            let db = app.shared.controllers.productsDB;
 
-            db.query('select * from produtos', function (err, results) {
-                if (err) res.status(500).send(err);
-
-                res.render('products/products-list/list', { lista: results });
+            db.list(dbConnection, function (erros, resultados) {
+                res.render('products/products-list/list', { lista: resultados });
             });
 
-            db.end();
+            dbConnection.end(); 
         });
 }

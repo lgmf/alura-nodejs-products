@@ -8,7 +8,7 @@ module.exports = () => {
     app.set('views', './app/views');
 
     expressLoad('routes', {cwd: 'app'})
-        .then('shared')
+        .then('shared')        
         .into(app);
 
     return app;
