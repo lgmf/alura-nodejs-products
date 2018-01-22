@@ -1,5 +1,15 @@
-let express = require('express')();
-express.set('view engine', 'ejs')
-express.set('views','./app/views')
+const express = require('express');
+const expressLoad = require('express-load');
 
-module.exports = () => { return express }
+module.exports = () => {
+ 
+    const app = express();
+    app.set('view engine', 'ejs');
+    app.set('views', './app/views');
+
+    expressLoad('routes', {cwd: 'app'})
+        .then('shared')
+        .into(app);
+
+    return app;
+};

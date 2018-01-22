@@ -1,10 +1,8 @@
-const connectionFactory = require('../shared/connectionFactory');
-
 module.exports = (app) => {
     app
         .get(`/products`, (req, res) => {
 
-            let db = connectionFactory();
+            let db = app.shared.connectionFactory();
 
             db.query('select * from produtos', function (err, results) {
                 if (err) res.status(500).send(err);
