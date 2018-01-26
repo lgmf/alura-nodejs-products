@@ -3,7 +3,7 @@ module.exports = (app) => {
         .get(`/products`, (req, res) => {
 
             let dbConnection = app.shared.connectionFactory();
-            let db = app.shared.dao.productsDB(dbConnection);
+            let db = new app.shared.dao.Product(dbConnection);
 
             db.list((err, results) => {
                 if (err) res.status(500).send(err);
