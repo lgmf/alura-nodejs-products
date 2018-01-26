@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <title>Products</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <form action="/products/save" method="POST">
+
+        <div>
+            <label for="titulo">Titulo
+                <input type="text" name="title" placeholder="coloque o titulo" />
+            </label>
+        </div>
+        <div>
+            <label>Preço
+                <input type="text" name="price" placeholder="150.25" />
+            </label>
+        </div>
+        <div>
+            <label>Descrição
+                <textarea cols="20" rows="10" name="description" placeholder="fale sobre o livro"></textarea>
+            </label>
+        </div>
+
+        <input type="submit" value="gravar" />
+    </form>
+</body>
+
+</html>
