@@ -8,13 +8,13 @@ module.exports = (app) => {
             db.list((err, results) => {
                 if (err) res.status(500).send(err);
 
-                res.render('products/products-list/list', { list: results });
+                res.render('products/products-list/products-list', { list: results });
             });
 
             dbConnection.end();
         })
         .get(`/products/new`, (req, res) => {
-            res.render('products/products-new/new');
+            res.render('products/products-new/products-new');
         })
         .post(`/products/save`, (req, res) => {
 
