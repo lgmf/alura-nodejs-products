@@ -9,7 +9,7 @@ Product.prototype.list = function (callback) {
 }
 
 Product.prototype.save = function (product, callback) {
-    this._dbConnection.query(`insert into products(title,price,description) values (?,?,?)`, [product.title, product.price, product.description], callback);
+    this._dbConnection.query(`insert into products set ?`, product, callback);
 }
 
 module.exports = function () {
