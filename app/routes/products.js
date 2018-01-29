@@ -16,7 +16,7 @@ module.exports = (app) => {
         .get(`/products/new`, (req, res) => {
             res.render('products/products-new/products-new');
         })
-        .post(`/products/save`, (req, res) => {
+        .post(`/products`, (req, res) => {
 
             let product = req.body;
             
