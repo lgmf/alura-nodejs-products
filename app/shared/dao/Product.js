@@ -1,17 +1,19 @@
-//vários returns para evitar que express-load tente executar
-//a função quando carregar o arquivo
-function Product(dbConnection) {
-    this._dbConnection = dbConnection;
+
+class Product {
+    constructor(dbConnection) {
+        this._dbConnection = dbConnection;
+    }
+
+    save(product, callback) {
+        this._dbConnection.query(`insert into products set ?`, product, callback);
+    }
+
+    list(callback) {
+        this._dbConnection.query('select * from products', callback);
+    }
 }
 
-Product.prototype.list = function (callback) {
-    this._dbConnection.query('select * from products', callback);
-}
-
-Product.prototype.save = function (product, callback) {
-    this._dbConnection.query(`insert into products set ?`, product, callback);
-}
-
-module.exports = function () {
+//Exports retorna uma function por causa da limitação do express load.
+module.exports = () => {
     return Product;
 }
