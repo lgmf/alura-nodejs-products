@@ -8,7 +8,14 @@ module.exports = (app) => {
             db.list((err, results) => {
                 if (err) res.status(500).send(err);
 
-                res.render('products/products-list/products-list', { list: results });
+                res.format({
+                    html: () => {
+                        res.render('products/products-list/products-list', { list: results });
+                    },
+                    json: () => {
+                        res.json(results)
+                    }
+                });
             });
 
             dbConnection.end();
@@ -19,7 +26,7 @@ module.exports = (app) => {
         .post(`/products`, (req, res) => {
 
             let product = req.body;
-            
+
             if (!product)
                 res
                     .status(500)
