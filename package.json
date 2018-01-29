@@ -2,9 +2,11 @@
   "name": "alura-nodejs-products",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "test": "cls && mocha"
   },
   "repository": {
     "type": "git",
@@ -24,5 +26,8 @@
     "express-validator": "^4.3.0",
     "mysql": "^2.15.0",
     "nodemon": "^1.14.11"
+  },
+  "devDependencies": {
+    "mocha": "^5.0.0"
   }
 }
