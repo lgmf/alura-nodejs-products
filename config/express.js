@@ -1,14 +1,24 @@
-const express = require('express');
-const expressLoad = require('express-load');
-const bodyParser = require('body-parser');
+const [express,
+    expressLoad,
+    bodyParser,
+expressValidator] =
+    [
+        require('express'),
+        require('express-load'),
+        require('body-parser'),
+        require('express-validator')
+    ]
 
 module.exports = () => {
 
     const app = express();
     app.set('view engine', 'ejs');
     app.set('views', './app/views');
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
+
+    //Middlewares
+    app.use(bodyParser.urlencoded({ extended: true }));//Formato tradiciona utilizado pela tag FORM do HTML
+    app.use(bodyParser.json());//Caso no corpo da requisição tenha objetos no formato JSON.
+    app.use(expressValidator())
 
     expressLoad('routes', { cwd: 'app' })
         .then('shared')

@@ -21,19 +21,31 @@ module.exports = (app) => {
             dbConnection.end();
         })
         .get(`/products/new`, (req, res) => {
-            res.render('products/products-new/products-new');
+            res.render('products/products-new/products-new', { errors: {}, product: {} });
         })
         .post(`/products`, (req, res) => {
-
             let product = req.body;
 
-            if (!product)
-                res
-                    .status(500)
-                    .json({
-                        success: false,
-                        message: `product cannot be null`
-                    });
+            req.assert('title', 'product title is required').notEmpty();
+            req.assert('price', 'price must be a number').isFloat();
+
+            const errors = req.validationErrors()
+            if (errors) {
+                res.format({
+                    html: () => {
+                        res
+                            .status(400)
+                            .render('products/products-new/products-new', { errors, product })
+                    },
+                    json: () => {
+                        res
+                            .status(400)
+                            .json({ errors, product })
+                    }
+                });
+
+                return false;
+            }
 
             let dbConnection = app.shared.connectionFactory();
             let db = new app.shared.dao.Product(dbConnection);

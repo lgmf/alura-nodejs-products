@@ -17,11 +17,12 @@
   },
   "homepage": "https://github.com/lgmf/alura-nodejs-products#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "express-load": "^1.1.16",
+    "express-validator": "^4.3.0",
     "mysql": "^2.15.0",
-    "nodemon": "^1.14.11",
-    "body-parser": "^1.18.2"
+    "nodemon": "^1.14.11"
   }
 }
