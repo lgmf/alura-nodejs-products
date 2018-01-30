@@ -9,5 +9,10 @@ curso de node.js do alura
 <li> set the variables at app/shared/connectionFactory.1.js</li>
 <li> rename connectionFactory.1.js to connectionFactory.js</li>
 <li> npm install --save</li> 
-<li> npm start</li>
+<li> npm run dev</li>
+</ul>
+
+# testing
+<ul>
+  <li>npm run test</li>
 </ul>
