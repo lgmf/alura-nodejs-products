@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "start": "node app.js",
-    "test": "cls && set NODE_ENV=test && mocha"
+    "dev": "set NODE_ENV=dev && nodemon app.js",
+    "test": "cls && set NODE_ENV=test && mocha",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "mocha": "^5.0.0",
-    "request": "^2.83.0"
+    "supertest": "^3.0.0"
   }
 }

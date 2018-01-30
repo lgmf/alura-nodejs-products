@@ -1,52 +1,45 @@
-var http = require('http');
-var request = require('request');
-var assert = require('assert');
+const app = require('../config/express')();
+const request = require('supertest')(app);
 
-describe('#ProdutosController', function () {
-    const config = {
-        hostname: 'localhost',
-        port: 8080,
-        path: '/products'
-    };
+const cleanDB = (done) => {
+    let dbConnection = app.shared.connectionFactory();
+    dbConnection.query("delete from products", (error, result) => {
+        if (!error) {
+            done();
+        }
+    });
+}
+
+describe('#ProdutosController', () => {
 
     const product = {
         title: "",
         price: "dasdsa",
         description: ""
-    }
+    };
+
+    beforeEach(cleanDB);
 
     it('#JSON list', function (done) {
-        config.headers = {
-            'Accept': 'application/json'
-        };
-
-        http
-            .get(config, (res) => {
-                assert.equal(res.statusCode, 200);
-                assert.equal(res.headers['content-type'], 'application/json; charset=utf-8');
-                done();//Para lidar com testes assincronos -> indica quando o teste pode terminar.
-            });
+        request
+            .get('/products')
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(200, done);
     });
 
     it('#HTML list', function (done) {
-        config.headers = {};
-        http
-            .get(config, (res) => {
-                assert.equal(res.statusCode, 200);
-                assert.equal(res.headers['content-type'], 'text/html; charset=utf-8');
-                done();//Para lidar com testes assincronos -> indica quando o teste pode terminar.
-            });
+        request
+            .get('/products')
+            .expect('Content-Type', /html/)
+            .expect(200, done);
     });
 
     it('#save JSON product with INVALID data', function (done) {
-        request.post(
-            'http://localhost:8080/products',
-            { json: product },
-            (error, res, body) => {
-                assert.equal(res.statusCode, 400);
-                done();//Para lidar com testes assincronos -> indica quando o teste pode terminar.
-            }
-        );
+        request
+            .post('/products')
+            .send(product)
+            .expect(400, done); //bad request
     });
 
     it('#save JSON product with VALID data', function (done) {
@@ -54,16 +47,10 @@ describe('#ProdutosController', function () {
         product.price = 125.25;
         product.description = "teste";
 
-        request.post(
-            'http://localhost:8080/products',
-            { json: product },
-            (error, res, body) => {
-                assert.equal(res.statusCode, 302);
-                done();//Para lidar com testes assincronos -> indica quando o teste pode terminar.
-            }
-        );
+        request
+            .post('/products')
+            .send(product)
+            .expect(302, done); //redirect
     });
-
-
 
 });
