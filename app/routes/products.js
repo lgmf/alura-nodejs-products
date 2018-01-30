@@ -8,14 +8,15 @@ module.exports = (app) => {
             db.list((err, results) => {
                 if (err) res.status(500).send(err);
 
-                res.format({
-                    html: () => {
-                        res.render('products/products-list/products-list', { list: results });
-                    },
-                    json: () => {
-                        res.json(results)
-                    }
-                });
+                res
+                    .format({
+                        html: () => {
+                            res.render('products/products-list/products-list', { list: results });
+                        },
+                        json: () => {
+                            res.json(results)
+                        }
+                    });
             });
 
             dbConnection.end();
@@ -59,7 +60,16 @@ module.exports = (app) => {
                             message: `error saving product --> ${err}`
                         });
 
-                res.redirect('/products');
+                res
+                    .format({
+                        html: () => {
+                            res.redirect('/products');
+                        },
+                        json: () => {
+                            res.json(results)
+                        }
+                    });
+
             });
 
             dbConnection.end();
