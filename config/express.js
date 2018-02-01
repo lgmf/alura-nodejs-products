@@ -18,7 +18,8 @@ module.exports = () => {
     //Middlewares
     app.use(bodyParser.urlencoded({ extended: true }));//Formato tradiciona utilizado pela tag FORM do HTML
     app.use(bodyParser.json());//Caso no corpo da requisição tenha objetos no formato JSON.
-    app.use(expressValidator())
+    app.use(expressValidator());
+    app.use(express.static('./app/assets'));
 
     expressLoad('routes', { cwd: 'app' })
         .then('shared')

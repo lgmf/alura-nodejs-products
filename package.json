@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "set NODE_ENV=dev && nodemon app.js",
     "test": "cls && set NODE_ENV=test && mocha",
-    "start": "node app.js"
+    "start": "set NODE_ENV=prod && node app.js"
   },
   "repository": {
     "type": "git",

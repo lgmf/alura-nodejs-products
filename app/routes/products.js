@@ -63,7 +63,7 @@ module.exports = (app) => {
                 res
                     .format({
                         html: () => {
-                            res.redirect('/products');
+                            res.redirect('/');
                         },
                         json: () => {
                             res.json(results)
