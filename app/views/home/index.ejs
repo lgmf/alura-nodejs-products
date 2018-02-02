@@ -35,15 +35,16 @@
                     <a class="nav-link" href="/products/new">Novo Livro</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
+                    <a class="nav-link" href="/offers/new">Nova Oferta</a>
                 </li>
             </ul>
         </div>
     </nav>
     <div class="container-fluid">
+        <div class="alert alert-info" role="alert" style="display: none; cursor: pointer;">
+            <h4 class="alert-heading"></h4>
+            <p></p>
+        </div>
         <div class="row">
             <%for(var i=0;i<list.length;i++) {%>
                 <div class="col-sm-2">
@@ -52,6 +53,7 @@
                             Livros
                         </div>
                         <div class="card-block">
+                            <!-- <img src="<%=list[i].img%>" alt="..." class="rounded-right"> -->
                             <h3 class="card-title">
                                 <%=list[i].title%>
                             </h3>
@@ -66,7 +68,25 @@
         </div>
     </div>
 
-    <script src="/assets/bootstrap-4.0.0-alpha.6-dist/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io('http://localhost:8080');
+        const alertInfo = document.querySelector('.alert-info');
+        const alertHeader = document.querySelector('.alert-info h4');
+        const alertMessage = document.querySelector('.alert-info p');
+
+        socket.on('newOffer', (offer) => {
+            alertHeader.innerText = offer.product.title;
+            alertMessage.innerText = offer.msg;
+            alertInfo.style.display = 'block';
+            setTimeout(() => {
+                alertInfo.style.display = 'none'
+            }, 10 * 1000);
+        });
+
+        alertInfo.addEventListener('click', (event) => { alertInfo.style.display = 'none' });
+
+    </script>
 </body>
 
 </html>

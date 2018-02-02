@@ -2,7 +2,7 @@ module.exports = (app) => {
     app
         .get('/offers/new', (req, res) => {
             const dbConnection = app.shared.connectionFactory();
-            let db = new app.shared.controllers.product(dbConnection);
+            const db = new app.shared.controllers.product(dbConnection);
 
             db.list((err, results) => {
                 if (err) res.status(500).send(err);
@@ -17,11 +17,27 @@ module.exports = (app) => {
                         }
                     });
             });
+
+            dbConnection.end();
         })
         .post('/offers/new', (req, res) => {
             let offer = req.body;
-            console.log(offer)
-            res.end();
+
+            const dbConnection = app.shared.connectionFactory();
+            const db = new app.shared.controllers.product(dbConnection);
+
+            db.get(offer.product.id, (err, results) => {
+                if (err) res.status(500).send(err);
+
+                offer.product = results[0];
+
+                app.get('io').emit('newOffer', offer);
+
+                res.redirect('/offers/new');
+            });
+
+            dbConnection.end();
+
         });
 
 }

@@ -11,6 +11,10 @@ class Product {
     list(callback) {
         this._dbConnection.query('select * from products', callback);
     }
+
+    get(productId, callback) {
+        this._dbConnection.query(`select * from products where id=?`, productId, callback);
+    }
 }
 
 //Exports retorna uma function por causa da limitação do express load.
