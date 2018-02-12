@@ -2,9 +2,11 @@
   "name": "alura-nodejs-products",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "set NODE_ENV=dev && nodemon app.js",
+    "test": "cls && set NODE_ENV=test && mocha",
+    "start": "set NODE_ENV=prod && node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,22 @@
   },
   "homepage": "https://github.com/lgmf/alura-nodejs-products#readme",
   "dependencies": {
+<<<<<<< HEAD
     "ejs": "^2.5.7",
     "express": "^4.16.2"
+=======
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-load": "^1.1.16",
+    "express-validator": "^4.3.0",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.14.11",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {
+    "mocha": "^5.0.0",
+    "supertest": "^3.0.0"
+>>>>>>> 57d0580a40c59ea8808ae9bc08dc131aa65530ed
   }
 }

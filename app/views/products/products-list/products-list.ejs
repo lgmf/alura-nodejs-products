@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <title>Products</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <a href="/products/new">Novo Produto</a>
+    <br/>
+    <br/>
+    <table>
+        <thead>
+            <th>id</th>
+            <th>titulo</th>
+            <th>descricao</th>
+            <th>preco</th>
+        </thead>
+        <tbody>
+            <%for(var i=0;i<list.length;i++) {%>
+                <tr>
+                    <td>
+                        <%=list[i].id%>
+                    </td>
+                    <td>
+                        <%=list[i].title%>
+                    </td>
+                    <td>
+                        <%=list[i].description%>
+                    </td>
+                    <td>
+                        <%=list[i].price%>
+                    </td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</body>
+
+</html>
